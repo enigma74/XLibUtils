@@ -36,36 +36,36 @@ using System.Text.RegularExpressions;
 
 namespace XLibUtils
 {
-    public partial class FormMain : Form
+	public partial class FormMain : Form
 	{
 		/// <summary>Custom format handler</summary>
 		/// <param name="g"></param>
 		/// <returns></returns>
-	    private delegate StringFormat CustomFormatHandler(Graphics g);
+		private delegate StringFormat CustomFormatHandler(Graphics g);
 
 		/// <summary>Char info</summary>
-        private class CharInfo
-        {
+		private class CharInfo
+		{
 			/// <summary>ASCII code</summary>
-            public readonly byte ASCII;
+			public readonly byte ASCII;
 			/// <summary>Char</summary>
-            public readonly char Ch;
+			public readonly char Ch;
 			/// <summary>Cell size</summary>
 			public Size Size;
 			/// <summary>Glyph data</summary>
-            public List<byte> Data = null;
+			public List<byte> Data;
 
 			// *********************************************************************
 
 			/// <summary>Constructor</summary>
 			/// <param name="ascii">ASCII code</param>
 			/// <param name="ch">Char</param>
-	        public CharInfo(byte ascii, char ch)
-	        {
-		        ASCII = ascii;
-		        Ch = ch;
-	        }
-        }
+			public CharInfo(byte ascii, char ch)
+			{
+				ASCII = ascii;
+				Ch = ch;
+			}
+		}
 
 		/// <summary>Chars data</summary>
 	    private class CharsData
@@ -80,13 +80,13 @@ namespace XLibUtils
 			public byte[] FontInfo;
 			/// <summary>Font size</summary>
 			public int FontSize;
-	    }
+		}
 
 		/// <summary>Source generation class</summary>
 		private class SourceWriter : StreamWriter
 		{
 			/// <summary>Tabs</summary>
-			private int m_t = 0;
+			private int m_t;
 
 			// *********************************************************************
 
@@ -111,7 +111,7 @@ namespace XLibUtils
 			/// <param name="pars"></param>
 			public void CodeLine(string fmt, params object[] pars)
 			{
-				string line = (pars.Length > 0) ? string.Format(fmt, pars) : fmt;
+				string line = pars.Length > 0 ? string.Format(fmt, pars) : fmt;
 				WriteLine("{0}{1}", Tabs, line);
 			}
 
@@ -131,13 +131,13 @@ namespace XLibUtils
 				CodeLine("}}{0}", semicolon ? ";" : "");
 			}
 
-			/// <summary></summary>
-			public void Separator()
-			{
-				WriteLine();
-				CodeLine("// *********************************************************************");
-				WriteLine();
-			}
+			///// <summary></summary>
+			//public void Separator()
+			//{
+			//	WriteLine();
+			//	CodeLine("// *********************************************************************");
+			//	WriteLine();
+			//}
 
 			/// <summary></summary>
 			/// <param name="file"></param>
@@ -170,8 +170,7 @@ namespace XLibUtils
 				int n = 0;
 				foreach (byte b in data)
 				{
-					Write(string.Format("{0}{1},",
-						(n == 0) ? Tabs : " ", Hex(b)));
+					Write("{0}{1},", n == 0 ? Tabs : " ", Hex(b));
 					n++;
 					if (n == 8)
 					{
@@ -185,21 +184,21 @@ namespace XLibUtils
 		}
 
 		/// <summary>Source builder class</summary>
-	    private class SourceBuilder : IDisposable
-	    {
+		private class SourceBuilder : IDisposable
+		{
 			/// <summary>Disposed flag</summary>
-			private bool m_disposed = false;
+			private bool m_disposed;
 
 			// *********************************************************************
 
 			/// <summary>Constructor</summary>
 			/// <param name="folder"></param>
 			/// <param name="symbol"></param>
-		    public SourceBuilder(string folder, string symbol)
-		    {
+			public SourceBuilder(string folder, string symbol)
+			{
 				if (!Directory.Exists(folder))
 					throw new DirectoryNotFoundException("Plese select a valid output folder");
-				bool ok = (symbol.Length > 0);
+				bool ok = symbol.Length > 0;
 				if (ok)
 					foreach (char ch in symbol)
 						if (!char.IsLetterOrDigit(ch))
@@ -210,17 +209,17 @@ namespace XLibUtils
 				if (!ok)
 					throw new InvalidOperationException("Plese specify a valid symbol name");
 				Symbol = symbol;
-				Func<string, string> _File = (_ext) => Path.Combine(folder, string.Format("{0}.{1}", symbol, _ext));
+				Func<string, string> _File = _ext => Path.Combine(folder, string.Format("{0}.{1}", symbol, _ext));
 				H = new SourceWriter(_File("h"));
 				H.WriteLine(" *");
 				CPP = new SourceWriter(_File("cpp"));
-		    }
+			}
 
 			/// <summary>Destructor</summary>
-		    ~SourceBuilder()
-		    {
+			~SourceBuilder()
+			{
 				Dispose(false);
-		    }
+			}
 
 			// *********************************************************************
 
@@ -247,9 +246,9 @@ namespace XLibUtils
 			/// <summary>Symbol</summary>
 			public string Symbol { get; private set; }
 			/// <summary>Header generator</summary>
-			public readonly SourceWriter H = null;
+			public readonly SourceWriter H;
 			/// <summary>CPP generator</summary>
-			public readonly SourceWriter CPP = null;
+			public readonly SourceWriter CPP;
 
 			/// <summary>Ends both files headers</summary>
 			/// <param name="bpp"></param>
@@ -257,7 +256,7 @@ namespace XLibUtils
 			public void EndHeaders(int bpp, int memorysize)
 			{
 				H.WriteLine(" * - Bits per pixel: {0}", bpp);
-				H.WriteLine(" * - Memory size: {0}", (memorysize > 1024)
+				H.WriteLine(" * - Memory size: {0}", memorysize > 1024
 					? string.Format("{0} KB", ((float)memorysize / 1024).ToString("0.00"))
 					: string.Format("{0} B", memorysize));
 				H.EndHeader();
@@ -298,91 +297,83 @@ namespace XLibUtils
 		}
 
 		/// <summary>Custom label</summary>
-	    private class CustomLabel : Label
-	    {
-			/// <summary>Constructor</summary>
-		    public CustomLabel()
-		    {
-		    }
-
-			// *********************************************************************
-
+		private class CustomLabel : Label
+		{
 			/// <summary></summary>
-		    public CustomFormatHandler CustomFormat = null;
+			public CustomFormatHandler CustomFormat;
 
 			/// <summary></summary>
 			/// <param name="e"></param>
 			protected override void OnPaint(PaintEventArgs e)
 			{
 				Graphics g = e.Graphics;
-				StringFormat sf = (CustomFormat != null)
+				StringFormat sf = CustomFormat != null
 					? CustomFormat(g)
 					: StringFormat.GenericDefault;
 				g.DrawString(Text, Font, new SolidBrush(ForeColor), ClientRectangle, sf);
 			}
-	    }
+		}
 
 		// *********************************************************************
 
 		/// <summary>By code update</summary>
-	    private bool m_code = true;
-
+		private bool m_code = true;
 		/// <summary>Letters</summary>
 		private const string s_letters = "abcdefghijklmnopqrstuvwxyz";
 		/// <summary>Numbers</summary>
 		private const string s_numbers = "0123456789";
 		/// <summary>ASCII</summary>
-	    private readonly string m_ascii = null;
+		private readonly string m_ascii;
 		/// <summary>Extended ASCII</summary>
-	    private readonly byte[] m_ext = null;
+		private readonly byte[] m_ext;
 
 		/// <summary>Settings</summary>
-	    private XLibUtilsSettings m_sts = null;
+		private XLibUtilsSettings m_sts;
 		/// <summary>Font</summary>
-	    private Font m_font = null;
+		private Font m_font;
 		/// <summary>Font name</summary>
-	    private string m_fontname = "";
+		private string m_fontname = "";
 		/// <summary>Glyph flags</summary>
-	    private byte m_flags;
+		private byte m_flags;
 
 		/// <summary>Unicode codepage</summary>
-	    private readonly Encoding m_unicode = Encoding.Unicode;
+		private readonly Encoding m_unicode = Encoding.Unicode;
 		/// <summary>Codepage</summary>
-	    private Encoding m_cp = null;
+		private Encoding m_cp;
 
 		// *********************************************************************
-        
+
 		/// <summary>Constructor</summary>
-        public FormMain()
-        {
-            InitializeComponent();
+		public FormMain()
+		{
+			InitializeComponent();
 			// ASCII initialization
 			m_ascii = "";
-            for (char ch = (char)0x21; ch <= 0x7e; ch++)
-	            m_ascii += ch;
+			for (char ch = (char)0x21; ch <= 0x7e; ch++)
+				m_ascii += ch;
 			// Extended ASCII initialization
 			List<byte> ext = new List<byte>();
-            for (int b = 0x80; b <= 0xff; b++)
-	            ext.Add((byte)b);
-	        m_ext = ext.ToArray();
-        }
+			for (int b = 0x80; b <= 0xff; b++)
+				ext.Add((byte)b);
+			m_ext = ext.ToArray();
+		}
 
 		// *********************************************************************
 
 		/// <summary></summary>
 		/// <param name="message"></param>
 		/// <param name="info"></param>
-	    private void Alert(string message, bool info = false)
-	    {
+		private void Alert(string message, bool info = false)
+		{
 			MessageBox.Show(this, message, Text, MessageBoxButtons.OK,
 				info ? MessageBoxIcon.Information : MessageBoxIcon.Exclamation);
-	    }
+		}
 
 		/// <summary></summary>
-	    private TypeConverter FontConverter
-	    {
-		    get { return TypeDescriptor.GetConverter(typeof(Font)); }
-	    }
+		private TypeConverter FontConverter
+		{
+			get { return TypeDescriptor.GetConverter(typeof(Font)); }
+		}
 
 		/// <summary></summary>
 		private void UpdateCP()
@@ -430,7 +421,7 @@ namespace XLibUtils
 
 		/// <summary></summary>
 		/// <param name="type"></param>
-	    private void UpdateControls(bool type = false)
+		private void UpdateControls(bool type = false)
 		{
 			m_code = true;
 			// update type by controls
@@ -439,7 +430,7 @@ namespace XLibUtils
 					? XLibType.Font
 					: (radCharsGlyphs.Checked ? XLibType.CharsGlyphs : XLibType.ImageGlyph);
 			// font update
-			Action<string> _SetFont = (_font) =>
+			Action<string> _SetFont = _font =>
 			{
 				m_font = FontConverter.ConvertFromInvariantString(_font) as Font
 					?? new Font("Courier New", 9.75f);
@@ -459,14 +450,14 @@ namespace XLibUtils
 			bool font = false;
 			bool glyphs = false;
 			string chars = "";
-			Func<int, int> _BPP = (_bpp) =>
+			Func<int, int> _BPP = _bpp =>
 			{
 				if ((_bpp < 1) || (_bpp > 4))
 					_bpp = 2;
 				trkBPP.Value = _bpp;
 				return _bpp;
 			};
-			Func<int, int> _Contrast = (_contrast) =>
+			Func<int, int> _Contrast = _contrast =>
 			{
 				if ((_contrast < 0) || (_contrast > 12))
 					_contrast = 4;
@@ -542,27 +533,27 @@ namespace XLibUtils
 		/// <summary></summary>
 		/// <param name="ch"></param>
 		/// <returns></returns>
-	    private byte GetASCII(char ch)
-	    {
+		private byte GetASCII(char ch)
+		{
 			byte[] b = Encoding.Convert(m_unicode, m_cp, m_unicode.GetBytes(new[] { ch }));
-			return (b.Length == 1) ? b[0] : (byte)0;
-	    }
+			return b.Length == 1 ? b[0] : (byte)0;
+		}
 
-		/// <summary></summary>
-		/// <param name="ascii"></param>
-		/// <returns></returns>
-	    private char GetChar(byte ascii)
-	    {
-			string str = m_unicode.GetString(Encoding.Convert(m_cp, m_unicode, new[] { ascii }));
-			return (str.Length > 0) ? str[0] : '\0';
-	    }
+		///// <summary></summary>
+		///// <param name="ascii"></param>
+		///// <returns></returns>
+		//private char GetChar(byte ascii)
+		//{
+		//	string str = m_unicode.GetString(Encoding.Convert(m_cp, m_unicode, new[] { ascii }));
+		//	return str.Length > 0 ? str[0] : '\0';
+		//}
 
 		/// <summary></summary>
 		/// <param name="font"></param>
 		/// <returns></returns>
-        private CharInfo[] SortedChars(bool font)
-        {
-            string str = txtChars.Text;
+		private CharInfo[] SortedChars(bool font)
+		{
+			string str = txtChars.Text;
 			if (str.Length == 0)
 				return null;
 			if (font)
@@ -599,36 +590,36 @@ namespace XLibUtils
 			// create list of valid chars
 			List<CharInfo> cis = new List<CharInfo>();
 			foreach (char ch in str)
-            {
-	            switch (ch)
-	            {
+			{
+				switch (ch)
+				{
 					case '\0':
-		            case ' ':
+					case ' ':
 					case '\n':
 					case '\r':
-	                    continue;
-	            }
-	            byte ascii = 0;
-	            if (font)
-	            {
-		            ascii = m_ccs.ContainsKey(ch) ? (byte)m_ccs[ch] : GetASCII(ch);
-		            if ((ascii == 0) || (cis.Find(_ci => _ci.ASCII == ascii) != null))
-			            continue;
-	            }
-	            else if (cis.Find(_ci => _ci.Ch == ch) != null)
+						continue;
+				}
+				byte ascii = 0;
+				if (font)
+				{
+					ascii = m_ccs.ContainsKey(ch) ? (byte)m_ccs[ch] : GetASCII(ch);
+					if ((ascii == 0) || (cis.Find(_ci => _ci.ASCII == ascii) != null))
+						continue;
+				}
+				else if (cis.Find(_ci => _ci.Ch == ch) != null)
 					continue;
-			    cis.Add(new CharInfo(ascii, ch));
-            }
+				cis.Add(new CharInfo(ascii, ch));
+			}
 			int count = cis.Count;
 			if (count == 0)
 				return null;
 			// sorts chars
 			if (font)
-				cis.Sort((_a, _b) => (_a.ASCII).CompareTo(_b.ASCII));
+				cis.Sort((_a, _b) => _a.ASCII.CompareTo(_b.ASCII));
 			else
-				cis.Sort((_a, _b) => (_a.Ch).CompareTo(_b.Ch));
+				cis.Sort((_a, _b) => _a.Ch.CompareTo(_b.Ch));
 			return cis.ToArray();
-        }
+		}
 
 		/// <summary></summary>
 		/// <param name="bitmap"></param>
@@ -636,7 +627,7 @@ namespace XLibUtils
 		/// <param name="cropped"></param>
 		/// <param name="skipdata"></param>
 		/// <returns></returns>
-        private List<byte> CroppedGlyphData(Bitmap bitmap, int bpp, out Rectangle cropped, bool skipdata = false)
+		private List<byte> CroppedGlyphData(Bitmap bitmap, int bpp, out Rectangle cropped, bool skipdata = false)
 		{
 			cropped = new Rectangle();
 			int max = (1 << bpp) - 1;
@@ -649,42 +640,42 @@ namespace XLibUtils
 			// find glyph
 			int w = bitmap.Width;
 			int h = bitmap.Height;
-			Func<int, bool> _YIsEmpty = (_x) =>
+			Func<int, bool> _YIsEmpty = _x =>
 			{
 				for (int _y = 0; _y < h; _y++)
 					if (_PixelAlpha(bitmap, _x, _y) > 0)
 						return false;
 				return true;
 			};
-            int l;
-            for (l = 0; l < w; l++)
-                if (!_YIsEmpty(l))
+			int l;
+			for (l = 0; l < w; l++)
+				if (!_YIsEmpty(l))
 					break;
-            int r;
-            for (r = 0; r < w; r++)
-                if (!_YIsEmpty(w - r - 1))
+			int r;
+			for (r = 0; r < w; r++)
+				if (!_YIsEmpty(w - r - 1))
 					break;
-			Func<int, bool> _XIsEmpty = (_y) =>
+			Func<int, bool> _XIsEmpty = _y =>
 			{
 				for (int _x = 0; _x < w; _x++)
 					if (_PixelAlpha(bitmap, _x, _y) > 0)
 						return false;
 				return true;
 			};
-            int t;
-            for (t = 0; t < h; t++)
-                if (!_XIsEmpty(t))
+			int t;
+			for (t = 0; t < h; t++)
+				if (!_XIsEmpty(t))
 					break;
 
-            int b;
-            for (b = 0; b < h; b++)
-                if (!_XIsEmpty(h - b - 1))
+			int b;
+			for (b = 0; b < h; b++)
+				if (!_XIsEmpty(h - b - 1))
 					break;
 			if (l >= w)
 				return null;
 			// crop glyph
 			List<byte> data = new List<byte>();
-            cropped = new Rectangle(l, t, w - l - r, h - t - b);
+			cropped = new Rectangle(l, t, w - l - r, h - t - b);
 			if (skipdata)
 				return data;
 			using (Bitmap glyph = bitmap.Clone(cropped, bitmap.PixelFormat))
@@ -711,12 +702,12 @@ namespace XLibUtils
 				if (count > 0)
 					data.Add((byte)(bits << (8 - count)));
 			}
-		    return data;
-        }
+			return data;
+		}
 
 		/// <summary></summary>
 		/// <param name="g"></param>
-	    private StringFormat TextFormat(Graphics g)
+		private StringFormat TextFormat(Graphics g)
 		{
 			int bpp;
 			bool cleartype;
@@ -732,22 +723,22 @@ namespace XLibUtils
 				cleartype = m_sts.CharsGlyphs.ClearType;
 				g.TextContrast = m_sts.Font.Contrast;
 			}
-			g.TextRenderingHint = (bpp == 1)
+			g.TextRenderingHint = bpp == 1
 				? TextRenderingHint.SingleBitPerPixelGridFit
 				: (cleartype
-					? TextRenderingHint.ClearTypeGridFit 
+					? TextRenderingHint.ClearTypeGridFit
 					: TextRenderingHint.AntiAliasGridFit);
 			StringFormat sf = new StringFormat();
 			sf.Alignment = StringAlignment.Near;
 			sf.LineAlignment = StringAlignment.Near;
 			sf.FormatFlags = StringFormatFlags.FitBlackBox;
 			return sf;
-	    }
+		}
 
 		/// <summary></summary>
 		/// <param name="font"></param>
 		/// <returns></returns>
-        private CharsData BuildCharsInfo(bool font)
+		private CharsData BuildCharsInfo(bool font)
 		{
 			// reading sorted chars
 			CharInfo[] scis = SortedChars(font);
@@ -770,7 +761,7 @@ namespace XLibUtils
 				foreach (CharInfo ci in scis)
 				{
 					// drawing char
-					string ch = (ci.Ch).ToString();
+					string ch = ci.Ch.ToString();
 					g.Clear(Color.White);
 					g.DrawString(ch, m_font, Brushes.Black, cell, sf);
 					// building data
@@ -790,7 +781,7 @@ namespace XLibUtils
 					}
 					// char and missing intermediate chars index
 					if (prev != 0x00)
-						for (int b = (prev + 1); b < ci.ASCII; b++)
+						for (int b = prev + 1; b < ci.ASCII; b++)
 						{
 							info.Add(0x00);
 							info.Add(0x00);
@@ -805,7 +796,7 @@ namespace XLibUtils
 					{
 						// offset
 						og.Clear(Color.White);
-						og.TextRenderingHint = ((bpp > 1) && m_sts.Font.ClearType)
+						og.TextRenderingHint = (bpp > 1) && m_sts.Font.ClearType
 							? TextRenderingHint.ClearTypeGridFit
 							: TextRenderingHint.AntiAliasGridFit;
 						TextRenderer.DrawText(og, ch, m_font, cell, Color.Black, Color.White,
@@ -830,7 +821,7 @@ namespace XLibUtils
 					ci.Data.InsertRange(0, new[]
 					{
 						(byte)ci.Size.Width,
-						(byte)(m_sts.Font.Centered ? ((ci.Size.Width - cropped.Width) / 2) : offset.X),
+						(byte)(m_sts.Font.Centered ? (ci.Size.Width - cropped.Width) / 2 : offset.X),
 						(byte)cropped.Y
 					});
 					fontsize += ci.Data.Count;
@@ -868,7 +859,7 @@ namespace XLibUtils
 
 		/// <summary></summary>
 		/// <param name="cd"></param>
-        private void BuildFont(CharsData cd)
+		private void BuildFont(CharsData cd)
 		{
 			string folder = m_sts.FontsFolder;
 			XLibFont sts = m_sts.Font;
@@ -876,8 +867,8 @@ namespace XLibUtils
 			using (SourceBuilder sb = new SourceBuilder(folder, symbol))
 			{
 				sb.H.WriteLine(" * - Font: {0}{1}{2}", m_fontname,
-					((sts.BPP > 1) && sts.ClearType) ? ", clear type" : "",
-					(sts.BPP > 1) ? string.Format(", contrast {0}", sts.Contrast) : "");
+					(sts.BPP > 1) && sts.ClearType ? ", clear type" : "",
+					sts.BPP > 1 ? string.Format(", contrast {0}", sts.Contrast) : "");
 				sb.H.WriteLine(" * - Max size: {0}x{1}", cd.Size.Width, cd.Size.Height);
 				sb.H.WriteLine(" * - Space width: {0}", cd.SpaceWidth);
 				sb.H.WriteLine(" * - Char range: {0} - {1}",
@@ -890,17 +881,17 @@ namespace XLibUtils
 				{
 					sb.CPP.CodeLine("// {0}{1}",
 						sb.CPP.Hex(ci.ASCII),
-						(ci.Ch != 127) ? string.Format(" '{0}'", ci.Ch) : "");
+						ci.Ch != 127 ? string.Format(" '{0}'", ci.Ch) : "");
 					sb.CPP.CodeData(ci.Data);
 				}
 				sb.CompleteFiles();
 			}
-        }
+		}
 
 		/// <summary></summary>
 		/// <param name="cd"></param>
-        private void BuildCharsGliphs(CharsData cd)
-        {
+		private void BuildCharsGliphs(CharsData cd)
+		{
 			string folder = m_sts.GlyphsFolder;
 			XLibCharsGlyphs sts = m_sts.CharsGlyphs;
 			foreach (CharInfo ci in cd.CIS)
@@ -909,24 +900,24 @@ namespace XLibUtils
 				using (SourceBuilder sb = new SourceBuilder(folder, string.Format("{0}U{1}", sts.Symbol, unicode)))
 				{
 					sb.H.WriteLine(" * - Font: {0}{1}{2}", m_fontname,
-						((sts.BPP > 1) && sts.ClearType) ? ", clear type" : "",
-						(sts.BPP > 1) ? string.Format(", contrast {0}", sts.Contrast) : "");
+						(sts.BPP > 1) && sts.ClearType ? ", clear type" : "",
+						sts.BPP > 1 ? string.Format(", contrast {0}", sts.Contrast) : "");
 					sb.H.WriteLine(" * - Glyph: (U+{0})", unicode);
 					sb.H.WriteLine(" * - Size: {0}x{1}", ci.Size.Width, ci.Size.Height);
 					sb.WriteGlyph(sts.BPP, ci.Data.Count, ci.Data);
 				}
 			}
-        }
+		}
 
 		/// <summary></summary>
-        private void BuildImageGlyph()
-        {
+		private void BuildImageGlyph()
+		{
 			string folder = m_sts.GlyphsFolder;
 			XLibImageGlyph sts = m_sts.ImageGlyph;
 			if (!File.Exists(sts.Image))
 				throw new FileNotFoundException("Plese select a source glyph image");
 			// bitmap data
-			List<byte> data = null;
+			List<byte> data;
 			Rectangle cropped;
 			using (Bitmap bitmap = new Bitmap(sts.Image, true))
 			{
@@ -942,7 +933,7 @@ namespace XLibUtils
 				sb.H.WriteLine(" * - Size: {0}x{1}", cropped.Width, cropped.Height);
 				sb.WriteGlyph(sts.BPP, data.Count, data);
 			}
-        }
+		}
 
 		/// <summary></summary>
 		private void Build()
@@ -996,7 +987,7 @@ namespace XLibUtils
 		/// <summary></summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-        private void FormMain_Load(object sender, EventArgs e)
+		private void FormMain_Load(object sender, EventArgs e)
 		{
 			try
 			{
@@ -1017,7 +1008,7 @@ namespace XLibUtils
 				Alert(ex.Message);
 				Close();
 			}
-        }
+		}
 
 		/// <summary></summary>
 		/// <param name="e"></param>
@@ -1043,7 +1034,7 @@ namespace XLibUtils
 		private void radFont_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!m_code)
-			    UpdateControls(true);
+				UpdateControls(true);
 		}
 
 		/// <summary></summary>
@@ -1052,7 +1043,7 @@ namespace XLibUtils
 		private void radCharsGlyphs_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!m_code)
-			    UpdateControls(true);
+				UpdateControls(true);
 		}
 
 		/// <summary></summary>
@@ -1061,14 +1052,14 @@ namespace XLibUtils
 		private void radImageGlyph_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!m_code)
-			    UpdateControls(true);
+				UpdateControls(true);
 		}
 
 		/// <summary></summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void btnSource_Click(object sender, EventArgs e)
-        {
+		{
 			try
 			{
 				if (m_sts.Type != XLibType.ImageGlyph)
@@ -1107,7 +1098,7 @@ namespace XLibUtils
 			{
 				m_code = false;
 			}
-        }
+		}
 
 		/// <summary></summary>
 		/// <param name="sender"></param>
@@ -1128,7 +1119,7 @@ namespace XLibUtils
 		/// <param name="e"></param>
 		private void btnLetters_Click(object sender, EventArgs e)
 		{
-            txtChars.Text += s_letters.ToUpper() + s_letters.ToLower();
+			txtChars.Text += s_letters.ToUpper() + s_letters.ToLower();
 		}
 
 		/// <summary></summary>
@@ -1136,7 +1127,7 @@ namespace XLibUtils
 		/// <param name="e"></param>
 		private void btnDigits_Click(object sender, EventArgs e)
 		{
-            txtChars.Text += s_numbers;
+			txtChars.Text += s_numbers;
 		}
 
 		/// <summary></summary>
@@ -1150,10 +1141,10 @@ namespace XLibUtils
 		/// <summary></summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-	    private void btnClear_Click(object sender, EventArgs e)
-	    {
-		    txtChars.Text = "";
-	    }
+		private void btnClear_Click(object sender, EventArgs e)
+		{
+			txtChars.Text = "";
+		}
 
 		/// <summary></summary>
 		/// <param name="sender"></param>
@@ -1180,7 +1171,7 @@ namespace XLibUtils
 				return;
 			switch (m_sts.Type)
 			{
-				case XLibType.Font: 
+				case XLibType.Font:
 					m_sts.Font.BPP = trkBPP.Value;
 					break;
 				case XLibType.CharsGlyphs:
@@ -1266,7 +1257,7 @@ namespace XLibUtils
 			string symbol = txtSymbol.Text.Trim();
 			switch (m_sts.Type)
 			{
-				case XLibType.Font: 
+				case XLibType.Font:
 					m_sts.Font.Symbol = symbol;
 					break;
 				case XLibType.CharsGlyphs:
@@ -1285,5 +1276,5 @@ namespace XLibUtils
 		{
 			Build();
 		}
-    }
+	}
 }

@@ -50,7 +50,7 @@ namespace XLibUtils
 			this.trkBPP = new System.Windows.Forms.TrackBar();
 			this.lblContrastL = new System.Windows.Forms.Label();
 			this.trkContrast = new System.Windows.Forms.TrackBar();
-			this.lblChars = new FormMain.CustomLabel();
+			this.lblChars = new XLibUtils.FormMain.CustomLabel();
 			this.chkClearType = new System.Windows.Forms.CheckBox();
 			this.chkCentered = new System.Windows.Forms.CheckBox();
 			this.line3 = new System.Windows.Forms.PictureBox();
@@ -429,10 +429,10 @@ namespace XLibUtils
 			this.Controls.Add(this.lblSymbolL);
 			this.Controls.Add(this.txtSymbol);
 			this.Controls.Add(this.btnBuild);
-			this.MinimumSize = new System.Drawing.Size(372, 513);
+			this.MinimumSize = new System.Drawing.Size(383, 513);
 			this.Name = "FormMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "XLib Utils";
+			this.Text = "eXtended Library Utils";
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			((System.ComponentModel.ISupportInitialize)(this.line1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.line2)).EndInit();

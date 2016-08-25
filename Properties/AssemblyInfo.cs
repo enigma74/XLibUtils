@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("XLib Utils")]
+[assembly: AssemblyTitle("eXtended Library Utils")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("XLib Utils")]
+[assembly: AssemblyProduct("eXtended Library Utils")]
 [assembly: AssemblyCopyright("Copyright (c) Moreno Seri (moreno.seri@gmail.com)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2015.11.10.0")]
-[assembly: AssemblyFileVersion("2015.11.10.0")]
+[assembly: AssemblyVersion("2016.8.25.0")]
+[assembly: AssemblyFileVersion("2016.8.25.0")]
