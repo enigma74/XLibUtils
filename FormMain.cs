@@ -68,7 +68,7 @@ namespace XLibUtils
 		}
 
 		/// <summary>Chars data</summary>
-	    private class CharsData
+		private class CharsData
 		{
 			/// <summary>Max font size</summary>
 			public Size Size;
@@ -394,7 +394,7 @@ namespace XLibUtils
 		}
 
 		/// <summary></summary>
-	    private void UpdateSample()
+		private void UpdateSample()
 		{
 			int bpp = 0;
 			int contrast = 0;
