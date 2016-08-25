@@ -2,34 +2,34 @@
 
 namespace XLibUtils
 {
-    partial class FormMain
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class FormMain
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.radFont = new System.Windows.Forms.RadioButton();
 			this.radCharsGlyphs = new System.Windows.Forms.RadioButton();
 			this.radImageGlyph = new System.Windows.Forms.RadioButton();
@@ -125,8 +125,10 @@ namespace XLibUtils
 			// 
 			// line1
 			// 
-			this.line1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.line1.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.line1.BackColor = System.Drawing.Color.Maroon;
 			this.line1.Location = new System.Drawing.Point(0, 54);
 			this.line1.Name = "line1";
@@ -145,9 +147,11 @@ namespace XLibUtils
 			// 
 			// txtChars
 			// 
-			this.txtChars.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtChars.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.txtChars.Location = new System.Drawing.Point(6, 78);
 			this.txtChars.Multiline = true;
 			this.txtChars.Name = "txtChars";
@@ -157,7 +161,9 @@ namespace XLibUtils
 			// 
 			// btnLetters
 			// 
-			this.btnLetters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnLetters.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnLetters.Location = new System.Drawing.Point(6, 186);
 			this.btnLetters.Name = "btnLetters";
 			this.btnLetters.Size = new System.Drawing.Size(84, 24);
@@ -168,7 +174,9 @@ namespace XLibUtils
 			// 
 			// btnDigits
 			// 
-			this.btnDigits.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnDigits.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnDigits.Location = new System.Drawing.Point(96, 186);
 			this.btnDigits.Name = "btnDigits";
 			this.btnDigits.Size = new System.Drawing.Size(84, 24);
@@ -179,7 +187,9 @@ namespace XLibUtils
 			// 
 			// btnASCII
 			// 
-			this.btnASCII.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnASCII.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnASCII.Location = new System.Drawing.Point(186, 186);
 			this.btnASCII.Name = "btnASCII";
 			this.btnASCII.Size = new System.Drawing.Size(84, 24);
@@ -190,7 +200,9 @@ namespace XLibUtils
 			// 
 			// btnClear
 			// 
-			this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnClear.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnClear.Location = new System.Drawing.Point(276, 186);
 			this.btnClear.Name = "btnClear";
 			this.btnClear.Size = new System.Drawing.Size(84, 24);
@@ -201,7 +213,9 @@ namespace XLibUtils
 			// 
 			// lblCPL
 			// 
-			this.lblCPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblCPL.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.lblCPL.AutoSize = true;
 			this.lblCPL.Location = new System.Drawing.Point(6, 216);
 			this.lblCPL.Name = "lblCPL";
@@ -211,7 +225,9 @@ namespace XLibUtils
 			// 
 			// cmbCP
 			// 
-			this.cmbCP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.cmbCP.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.cmbCP.FormattingEnabled = true;
 			this.cmbCP.Location = new System.Drawing.Point(6, 234);
 			this.cmbCP.Name = "cmbCP";
@@ -220,7 +236,9 @@ namespace XLibUtils
 			// 
 			// btnExtended
 			// 
-			this.btnExtended.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnExtended.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnExtended.Location = new System.Drawing.Point(186, 228);
 			this.btnExtended.Name = "btnExtended";
 			this.btnExtended.Size = new System.Drawing.Size(84, 24);
@@ -231,8 +249,10 @@ namespace XLibUtils
 			// 
 			// line2
 			// 
-			this.line2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.line2.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.line2.BackColor = System.Drawing.Color.Maroon;
 			this.line2.Location = new System.Drawing.Point(0, 264);
 			this.line2.Name = "line2";
@@ -242,7 +262,9 @@ namespace XLibUtils
 			// 
 			// lblBPPL
 			// 
-			this.lblBPPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblBPPL.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.lblBPPL.AutoSize = true;
 			this.lblBPPL.Location = new System.Drawing.Point(6, 276);
 			this.lblBPPL.Name = "lblBPPL";
@@ -252,7 +274,9 @@ namespace XLibUtils
 			// 
 			// trkBPP
 			// 
-			this.trkBPP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.trkBPP.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.trkBPP.AutoSize = false;
 			this.trkBPP.Location = new System.Drawing.Point(6, 294);
 			this.trkBPP.Name = "trkBPP";
@@ -263,7 +287,9 @@ namespace XLibUtils
 			// 
 			// lblContrastL
 			// 
-			this.lblContrastL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblContrastL.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.lblContrastL.AutoSize = true;
 			this.lblContrastL.Location = new System.Drawing.Point(186, 276);
 			this.lblContrastL.Name = "lblContrastL";
@@ -273,7 +299,9 @@ namespace XLibUtils
 			// 
 			// trkContrast
 			// 
-			this.trkContrast.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.trkContrast.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.trkContrast.AutoSize = false;
 			this.trkContrast.Location = new System.Drawing.Point(186, 294);
 			this.trkContrast.Name = "trkContrast";
@@ -284,8 +312,10 @@ namespace XLibUtils
 			// 
 			// lblChars
 			// 
-			this.lblChars.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblChars.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.lblChars.BackColor = System.Drawing.SystemColors.Window;
 			this.lblChars.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.lblChars.Location = new System.Drawing.Point(6, 336);
@@ -295,7 +325,9 @@ namespace XLibUtils
 			// 
 			// chkClearType
 			// 
-			this.chkClearType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.chkClearType.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.chkClearType.AutoSize = true;
 			this.chkClearType.Location = new System.Drawing.Point(6, 426);
 			this.chkClearType.Name = "chkClearType";
@@ -307,7 +339,9 @@ namespace XLibUtils
 			// 
 			// chkCentered
 			// 
-			this.chkCentered.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.chkCentered.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.chkCentered.AutoSize = true;
 			this.chkCentered.Location = new System.Drawing.Point(96, 426);
 			this.chkCentered.Name = "chkCentered";
@@ -319,8 +353,10 @@ namespace XLibUtils
 			// 
 			// line3
 			// 
-			this.line3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.line3.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.line3.BackColor = System.Drawing.Color.Maroon;
 			this.line3.Location = new System.Drawing.Point(0, 450);
 			this.line3.Name = "line3";
@@ -330,7 +366,9 @@ namespace XLibUtils
 			// 
 			// lblFolderL
 			// 
-			this.lblFolderL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblFolderL.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.lblFolderL.AutoSize = true;
 			this.lblFolderL.Location = new System.Drawing.Point(6, 462);
 			this.lblFolderL.Name = "lblFolderL";
@@ -340,7 +378,9 @@ namespace XLibUtils
 			// 
 			// txtFolder
 			// 
-			this.txtFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.txtFolder.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.txtFolder.Location = new System.Drawing.Point(6, 480);
 			this.txtFolder.Name = "txtFolder";
 			this.txtFolder.ReadOnly = true;
@@ -350,7 +390,9 @@ namespace XLibUtils
 			// 
 			// btnFolder
 			// 
-			this.btnFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnFolder.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnFolder.FlatAppearance.BorderSize = 0;
 			this.btnFolder.Location = new System.Drawing.Point(336, 480);
 			this.btnFolder.Name = "btnFolder";
@@ -362,7 +404,9 @@ namespace XLibUtils
 			// 
 			// lblSymbolL
 			// 
-			this.lblSymbolL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblSymbolL.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.lblSymbolL.AutoSize = true;
 			this.lblSymbolL.Location = new System.Drawing.Point(6, 510);
 			this.lblSymbolL.Name = "lblSymbolL";
@@ -372,7 +416,9 @@ namespace XLibUtils
 			// 
 			// txtSymbol
 			// 
-			this.txtSymbol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.txtSymbol.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.txtSymbol.Location = new System.Drawing.Point(6, 528);
 			this.txtSymbol.Name = "txtSymbol";
 			this.txtSymbol.Size = new System.Drawing.Size(174, 20);
@@ -382,9 +428,12 @@ namespace XLibUtils
 			// 
 			// btnBuild
 			// 
-			this.btnBuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnBuild.Anchor =
+				((System.Windows.Forms.AnchorStyles)
+					((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnBuild.FlatAppearance.BorderSize = 0;
-			this.btnBuild.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnBuild.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular,
+				System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnBuild.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnBuild.Location = new System.Drawing.Point(276, 522);
 			this.btnBuild.Name = "btnBuild";
@@ -441,10 +490,9 @@ namespace XLibUtils
 			((System.ComponentModel.ISupportInitialize)(this.line3)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+		}
 
-        }
-
-        #endregion
+		#endregion
 
 		private RadioButton radFont;
 		private RadioButton radCharsGlyphs;
@@ -476,6 +524,5 @@ namespace XLibUtils
 		private Label lblSymbolL;
 		private TextBox txtSymbol;
 		private Button btnBuild;
-    }
+	}
 }
-
